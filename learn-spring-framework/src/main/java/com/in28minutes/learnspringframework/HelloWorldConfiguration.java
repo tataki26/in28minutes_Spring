@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Configuration;
 // record: 클래스보다 더 간결한 문법으로 데이터 모델을 정의
 // 불변 데이터를 저장하는 데 사용
 // getter/setter, 생성자, toString을 정의할 필요가 없다 (자동 생성)
-record Person(String name, int age) {};
+// Bean을 파라미터로 추가하기
+record Person(String name, int age, Address address) {};
 record Address(String firstLine, String city) {};
 
 // 하나 이상의 Bean 메서드(Bean 생성)를 선언하는 클래스임을 나타냄
@@ -27,11 +28,30 @@ public class HelloWorldConfiguration {
     @Bean
     public Person person() {
         // 생성자 없이도 new 사용 (자동 생성)
-        return new Person("Luna", 20);
+        return new Person("Luna", 20, new Address("Main Street", "LA"));
     }
 
+    // Bean 상호 작용
     @Bean
+    public Person person2MethodCall() {
+        return new Person(name(), age(), address());
+    }
+
+    // 파라미터로 상호 작용
+    // 객체(메서드) 이름 유의
+    @Bean
+    public Person person3Parameters(String name, int age, Address addr2) {
+        return new Person(name, age, addr2);
+    }
+
+    // Bean 이름을 지정할 수 있다
+    @Bean(name = "addr")
     public Address address() {
         return new Address("han-river", "seoul");
+    }
+
+    @Bean(name = "addr2")
+    public Address address2() {
+        return new Address("baker street", "london");
     }
 }
