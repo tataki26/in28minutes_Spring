@@ -1,18 +1,18 @@
 package com.in28minutes.learnspringframework.game;
 
 public class GameRunner {
-    MarioGame marioGame;
-    SuperContraGame superContraGame;
-    public GameRunner(SuperContraGame superContraGame) {
-        this.superContraGame = superContraGame;
+    private GamingConsole gamingConsole;
+
+    public GameRunner(GamingConsole gamingConsole) {
+        this.gamingConsole = gamingConsole;
     }
 
     public void run() {
-        System.out.println("Running game: " + superContraGame);
+        System.out.println("Running game: " + gamingConsole);
 
-        superContraGame.up();
-        superContraGame.down();
-        superContraGame.left();
-        superContraGame.right();
+        gamingConsole.up();
+        gamingConsole.down();
+        gamingConsole.left();
+        gamingConsole.right();
     }
 }

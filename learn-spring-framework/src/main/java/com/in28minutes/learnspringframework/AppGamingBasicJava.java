@@ -9,7 +9,10 @@ public class AppGamingBasicJava {
         MarioGame marioGame = new MarioGame();
         SuperContraGame superContraGame = new SuperContraGame();
 
-        GameRunner gameRunner = new GameRunner(superContraGame);
-        gameRunner.run();
+        GameRunner marioGameRunner = new GameRunner(marioGame);
+        marioGameRunner.run();
+
+        GameRunner superContraGameRunner = new GameRunner(superContraGame);
+        superContraGameRunner.run();
     }
 }
