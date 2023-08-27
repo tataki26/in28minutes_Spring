@@ -11,5 +11,8 @@ public class App02HelloWorldSpring {
         // 2) @Configuration: Spring Framework의 관리 대상 설정하기
         // 메서드 이름으로 Bean 조회하기(호출하기)
         System.out.println(context.getBean("name"));
+        System.out.println(context.getBean("age"));
+        System.out.println(context.getBean("person"));
+        System.out.println(context.getBean("address"));
     }
 }
