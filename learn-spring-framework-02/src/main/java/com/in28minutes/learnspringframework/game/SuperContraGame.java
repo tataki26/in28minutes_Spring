@@ -1,5 +1,11 @@
 package com.in28minutes.learnspringframework.game;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+// 한정자로 컴포넌트 대상을 한정할 수 있다
+@Qualifier("SuperContraGameQualifier")
 public class SuperContraGame implements GamingConsole {
     public void up() {
         System.out.println("Up");
