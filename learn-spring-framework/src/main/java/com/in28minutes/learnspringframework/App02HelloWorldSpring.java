@@ -2,6 +2,8 @@ package com.in28minutes.learnspringframework;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Arrays;
+
 public class App02HelloWorldSpring {
     public static void main(String[] args) {
         // 1) Spring Application or Spring Context 실행하기
@@ -22,5 +24,18 @@ public class App02HelloWorldSpring {
         System.out.println(context.getBean("person2MethodCall"));
         // 다른 Bean과 상호 작용 2 - 파라미터
         System.out.println(context.getBean("person3Parameters"));
+
+        // 등록된 Spring Bean 나열하기
+        // 함수형 프로그래밍 - 메서드 참조
+        Arrays.stream(context.getBeanDefinitionNames())
+                .forEach(System.out::println);
+
+        // 등록된 Spring Bean 수 나열하기
+        // context.getBeanDefinitionCount();
+
+        // Primary 설정
+        System.out.println(context.getBean("person4Parameters"));
+        // Qualifier 설정
+        System.out.println(context.getBean("person5Qualifier"));
     }
 }

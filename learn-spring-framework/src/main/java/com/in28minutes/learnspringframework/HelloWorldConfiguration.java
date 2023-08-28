@@ -1,7 +1,9 @@
 package com.in28minutes.learnspringframework;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 // record: 클래스보다 더 간결한 문법으로 데이터 모델을 정의
 // 불변 데이터를 저장하는 데 사용
@@ -44,13 +46,28 @@ public class HelloWorldConfiguration {
         return new Person(name, age, addr2);
     }
 
+    @Bean
+    // Primary가 지정됨에 따라 address는 Primary가 지정된 address를 의미한다
+    public Person person4Parameters(String name, int age, Address address) {
+        return new Person(name, age, address);
+    }
+
+    @Bean
+    // Qualifier로 지정된 address를 의미한다
+    public Person person5Qualifier(String name, int age, @Qualifier("address2qualifier") Address address) {
+        return new Person(name, age, address);
+    }
+
     // Bean 이름을 지정할 수 있다
     @Bean(name = "addr")
+    // Bean을 타입으로 조회할 때 우선 순위를 가짐
+    @Primary
     public Address address() {
         return new Address("han-river", "seoul");
     }
 
     @Bean(name = "addr2")
+    @Qualifier("address2qualifier")
     public Address address2() {
         return new Address("baker street", "london");
     }
