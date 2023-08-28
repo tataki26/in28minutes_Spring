@@ -8,17 +8,8 @@ public class App03GamingSpringBeans {
         try(AnnotationConfigApplicationContext context
                     = new AnnotationConfigApplicationContext
                 (GamingConfiguration.class)) {
-            GameRunner marioGameRunner = new GameRunner(context.getBean(MarioGame.class));
-            marioGameRunner.run();
-
-            GameRunner superContraGameRunner = new GameRunner(context.getBean(SuperContraGame.class));
-            superContraGameRunner.run();
-
-            GameRunner pacmanGameRunner = new GameRunner(context.getBean(PacmanGame.class));
-            pacmanGameRunner.run();
-
-            GameRunner gameRunner = new GameRunner(context.getBean(GamingConsole.class));
-            gameRunner.run();
+            context.getBean(GamingConsole.class).up();
+            context.getBean(GameRunner.class).run();
         }
     }
 }

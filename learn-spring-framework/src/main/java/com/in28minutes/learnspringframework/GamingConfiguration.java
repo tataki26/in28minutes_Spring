@@ -8,18 +8,13 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class GamingConfiguration {
     @Bean
-    @Primary
-    public GamingConsole marioGame() {
+    public GamingConsole gamingConsole() {
         return new MarioGame();
     }
 
     @Bean
-    public GamingConsole superContraGame() {
-        return new SuperContraGame();
-    }
-
-    @Bean
-    public GamingConsole pacmanGame() {
-        return new PacmanGame();
+    // 기존에 등록된 Bean 연결 하기(Wiring)
+    public GameRunner gameRunner(GamingConsole gamingConsole) {
+        return new GameRunner(gamingConsole);
     }
 }
