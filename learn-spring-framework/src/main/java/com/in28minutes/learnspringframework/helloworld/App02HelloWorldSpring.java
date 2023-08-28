@@ -38,6 +38,6 @@ public class App02HelloWorldSpring {
             System.out.println(context.getBean("person4Parameters"));
             // Qualifier 설정
             System.out.println(context.getBean("person5Qualifier"));
-        };
+        }
     }
 }
