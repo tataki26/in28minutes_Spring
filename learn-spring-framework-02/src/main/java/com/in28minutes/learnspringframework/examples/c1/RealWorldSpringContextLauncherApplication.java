@@ -18,8 +18,7 @@ public class RealWorldSpringContextLauncherApplication {
                     .forEach(System.out::println);
 
             System.out.println(
-                    context.getBean(BusinessCalculationService.class)
-                            .findMax());
+                    context.getBean(BusinessCalculationService.class).findMax());
         }
     }
 }
