@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+   <!-- id: 메서드 이름 / class: 반환 타입 -->
+    <bean id="name" class="java.lang.String">
+        <!-- value: 반환 값 -->
+        <constructor-arg value="Ranga"/>
+    </bean>
+    <bean id="age" class="java.lang.Integer">
+        <!-- value: 반환 값 -->
+        <constructor-arg value="20"/>
+    </bean>
+    
+    <!-- component scan -->
+    <!-- <context:component-scan
+            base-package="com.in28minutes.learnspringframework.game"/> -->
+
+    <!-- 각각의 Bean 따로 정의하기 -->
+    <!-- PacmanGame 인스턴스(Bean) 생성 -->
+    <bean id="game" class="com.in28minutes.learnspringframework.game.PacmanGame"/>
+    <bean id="gameRunner"
+          class="com.in28minutes.learnspringframework.game.GameRunner">
+        <!-- 생성자 주입 -->
+        <constructor-arg ref="game"/>
+    </bean>
+</beans>
