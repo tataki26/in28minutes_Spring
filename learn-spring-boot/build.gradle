@@ -24,3 +24,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	archiveFileName = 'learn-spring-boot.jar'
+	mainClass = 'com.in28minutes.springboot.learnspringboot.LearnSpringBootApplication'
+}
