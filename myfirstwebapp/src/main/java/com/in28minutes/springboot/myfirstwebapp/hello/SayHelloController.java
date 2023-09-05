@@ -32,4 +32,13 @@ public class SayHelloController {
 
         return sb.toString();
     }
+
+    // "say-hello-jsp" => sayHello.jsp
+    // @ResponseBody를 생략하면 view 반환
+    // view를 정의하면 Java 코드에 html을 정의할 필요가 없으므로 훨씬 간략하다
+    @RequestMapping("say-hello-jsp")
+    public String sayHelloJsp() {
+        // jsp 파일 이름 - 경로는 application.properties에서 지정
+        return "sayHello";
+    }
 }
