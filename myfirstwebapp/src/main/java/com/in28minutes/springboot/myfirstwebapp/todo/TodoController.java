@@ -29,7 +29,7 @@ public class TodoController {
     public String showNewTodoPage(ModelMap model) {
         String username = (String)model.get("name");
         // 단방향 바인딩 - Bean에서 양식으로 바인딩
-        Todo todo = new Todo(0, username, "Default Desc", LocalDate.now().plusYears(1), false);
+        Todo todo = new Todo(0, username, "", LocalDate.now().plusYears(1), false);
         model.put("todo", todo);
         return "todo";
     }
@@ -49,6 +49,12 @@ public class TodoController {
 
         // list-todos 페이지로 리다이렉트
         // view 이름이 아닌 url을 적어야 한다
+        return "redirect:list-todos";
+    }
+
+    @RequestMapping("delete-todo")
+    public String deleteTodo(@RequestParam int id) {
+        todoService.deleteById(id);
         return "redirect:list-todos";
     }
 }
