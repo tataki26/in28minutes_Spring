@@ -45,7 +45,7 @@ public class TodoController {
         }
 
         String username = (String)model.get("name");
-        todoService.addTodo(username, todo.getDescription(), LocalDate.now().plusYears(1), false);
+        todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
 
         // list-todos 페이지로 리다이렉트
         // view 이름이 아닌 url을 적어야 한다
