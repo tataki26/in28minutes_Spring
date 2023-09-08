@@ -19,7 +19,12 @@ public class TodoService {
     }
 
     public Todo findById(int id) {
-        return todos.get(id);
+        Predicate<? super Todo> predicate
+                = todo -> todo.getId() == id;
+        return todos.stream()
+                    .filter(predicate)
+                    .findFirst()
+                    .get();
     }
 
     public List<Todo> findByUsername(String username) {
@@ -39,9 +44,8 @@ public class TodoService {
     }
 
     public void updateById(int id, String description) {
-        int listId = --id;
-        Todo todo = findById(listId);
+        Todo todo = findById(id);
         todo.setDescription(description);
-        todos.set(listId, todo);
+        todos.set(id, todo);
     }
 }

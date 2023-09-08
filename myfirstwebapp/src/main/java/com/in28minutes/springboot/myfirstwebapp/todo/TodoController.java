@@ -60,10 +60,10 @@ public class TodoController {
 
     @RequestMapping(value = "update-todo", method = RequestMethod.GET)
     public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
-        String username = (String)model.get("name");
-        Todo todoById = todoService.findById(--id);
-        Todo todo = new Todo(0, username, todoById.getDescription(), LocalDate.now().plusYears(1), false);
-        model.put("todo", todo);
+        Todo todo = todoService.findById(id);
+        // update는 이미 생성된 model을 가져와서 사용하면 된다
+        // model에 기존에 추가한 description이 포함되어 있다
+        model.addAttribute("todo", todo);
         return "todo";
     }
 
