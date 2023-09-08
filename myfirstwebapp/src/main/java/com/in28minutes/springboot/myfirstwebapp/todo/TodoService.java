@@ -18,6 +18,10 @@ public class TodoService {
         todos.add(new Todo(++todosCount, "in28minutes", "Learn Full Stack Development", LocalDate.now().plusYears(3), false));
     }
 
+    public Todo findById(int id) {
+        return todos.get(id);
+    }
+
     public List<Todo> findByUsername(String username) {
         return todos;
     }
@@ -32,5 +36,12 @@ public class TodoService {
         Predicate<? super Todo> predicate
                 = todo -> todo.getId() == id;
         todos.removeIf(predicate);
+    }
+
+    public void updateById(int id, String description) {
+        int listId = --id;
+        Todo todo = findById(listId);
+        todo.setDescription(description);
+        todos.set(listId, todo);
     }
 }
