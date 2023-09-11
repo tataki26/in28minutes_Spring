@@ -17,11 +17,9 @@ import java.util.List;
 @Controller
 @SessionAttributes("name")
 public class TodoControllerJpa {
-    private TodoService todoService;
     private TodoRepository todoRepository;
 
-    public TodoControllerJpa(TodoService todoService, TodoRepository todoRepository) {
-        this.todoService = todoService;
+    public TodoControllerJpa(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
 
@@ -53,8 +51,11 @@ public class TodoControllerJpa {
             return "todo";
         }
 
+        // todo에 값을 설정하는 이유는 TodoRepository가 객체 자체를 받기 때문이다
         String username = getLoggedInUsername(model);
-        todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
+        todo.setUsername(username);
+
+        todoRepository.save(todo);
 
         // list-todos 페이지로 리다이렉트
         // view 이름이 아닌 url을 적어야 한다
@@ -63,13 +64,13 @@ public class TodoControllerJpa {
 
     @RequestMapping("delete-todo")
     public String deleteTodo(@RequestParam int id) {
-        todoService.deleteById(id);
+        todoRepository.deleteById(id);
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "update-todo", method = RequestMethod.GET)
     public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
-        Todo todo = todoService.findById(id);
+        Todo todo = todoRepository.findById(id).get();
         // update는 이미 생성된 model을 가져와서 사용하면 된다
         // model에 기존에 추가한 description이 포함되어 있다
         model.addAttribute("todo", todo);
@@ -83,7 +84,9 @@ public class TodoControllerJpa {
         }
         String username = getLoggedInUsername(model);
         todo.setUsername(username);
-        todoService.updateTodo(todo);
+
+        todoRepository.save(todo);
+
         return "redirect:list-todos";
     }
 
