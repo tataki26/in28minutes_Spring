@@ -40,4 +40,9 @@ public class UserResource {
                         .toUri(); // convert into URI
         return ResponseEntity.created(location).build();
     }
+
+    @DeleteMapping(path = "/users/{id}")
+    public void deleteUser(@PathVariable int id) {
+        service.deleteById(id);
+    }
 }
