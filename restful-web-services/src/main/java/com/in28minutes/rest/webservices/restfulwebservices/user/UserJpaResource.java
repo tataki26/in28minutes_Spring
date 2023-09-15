@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -71,6 +72,24 @@ public class UserJpaResource {
         }
 
         return user.get().getPosts();
+    }
+
+    @GetMapping(path = "/jpa/users/{userId}/posts/{postId}")
+    public Post retrievePostForUser(@PathVariable int userId, @PathVariable int postId) {
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("id:" + userId);
+        }
+
+        List<Post> posts = user.get().getPosts();
+
+        Predicate<? super Post> predicate = post -> post.getId().equals(postId);
+
+        return posts.stream()
+                .filter(predicate)
+                .findFirst()
+                .orElse(null);
     }
     
     @PostMapping(path = "/jpa/users/{id}/posts")
