@@ -2,13 +2,25 @@ import { useState } from 'react';
 import { PropTypes } from 'prop-types'
 import './Counter.css';
 
-export default function Counter({by}) {
-    // 구조 분해
-    // current value, function(for update)
-    // useStatue(initial value);
+export default function Counter() {
     const [count, setCount] = useState(0);
 
-    console.log(by)
+    function incrementCounterParentFunction(by) {
+        setCount(count + by)
+    }
+
+    return (
+        <>
+            <span className="totalCount">{count}</span>
+            <CounterButton />
+            <CounterButton by={2}/>
+            <CounterButton by={5}/>
+        </>
+    )
+}
+
+function CounterButton({by}) {
+    const [count, setCount] = useState(0);
 
     function incrementCounterFunction() {
         setCount(count + by);
@@ -33,11 +45,11 @@ export default function Counter({by}) {
     )
 }
 
-Counter.protTypes = {
+CounterButton.protTypes = {
     // 타입이 맞지 않으면 타입 오류 출력
     by: PropTypes.number
 }
 
-Counter.defaultProps = {
+CounterButton.defaultProps = {
     by: 1
 }
