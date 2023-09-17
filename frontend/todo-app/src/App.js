@@ -1,5 +1,9 @@
 import './App.css';
-import { Component } from 'react';
+import FirstComponent from './components/learning-examples/FirstComponent';
+import SecondComponent from './components/learning-examples/SecondComponent';
+import ThirdComponent from './components/learning-examples/ThirdComponent';
+import FourthComponent from './components/learning-examples/FourthComponent';
+import { FifthComponent } from './components/learning-examples/FirstComponent';
 
 function App() {
   return (
@@ -8,42 +12,9 @@ function App() {
       <SecondComponent></SecondComponent>
       <ThirdComponent />
       <FourthComponent></FourthComponent>
+      <FifthComponent />
     </div>
   );
-}
-
-// function component
-
-function FirstComponent() {
-  return <div className="FirstComponent">First Component</div>
-}
-
-function SecondComponent() {
-  return (
-    <div className='SecondComponent'>Second Component</div>
-  )
-}
-
-// class component
-
-class ThirdComponent extends Component {
-  render() {
-    return (
-      <div className='ThirdComponent'>Third Component</div>
-    )
-  }
-}
-
-class FourthComponent extends Component {
-  render() {
-    return (
-      // parent
-      <>
-        <div className='FourthComponent'>Fourth Component 1</div>
-        <div className='FourthComponent'>Fourth Component 2</div>
-      </>
-    )
-  }
 }
 
 export default App;
