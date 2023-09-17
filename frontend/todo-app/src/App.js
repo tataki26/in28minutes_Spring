@@ -4,9 +4,9 @@ import { Component } from 'react';
 function App() {
   return (
     <div className="App">
-      <FirstComponent></FirstComponent>
+      <FirstComponent />
       <SecondComponent></SecondComponent>
-      <ThirdComponent></ThirdComponent>
+      <ThirdComponent />
       <FourthComponent></FourthComponent>
     </div>
   );
@@ -15,9 +15,7 @@ function App() {
 // function component
 
 function FirstComponent() {
-  return (
-    <div className="FirstComponent">First Component</div>
-  )
+  return <div className="FirstComponent">First Component</div>
 }
 
 function SecondComponent() {
@@ -39,7 +37,11 @@ class ThirdComponent extends Component {
 class FourthComponent extends Component {
   render() {
     return (
-      <div className='FourthComponent'>Fourth Component</div>
+      // parent
+      <>
+        <div className='FourthComponent'>Fourth Component 1</div>
+        <div className='FourthComponent'>Fourth Component 2</div>
+      </>
     )
   }
 }
