@@ -1,13 +1,24 @@
-import './Counter.css'
+import { useState } from 'react';
+import './Counter.css';
 
 export default function Counter() {
+    // const state = useState(0);
+    // 구조 분해
+    // current value, function(for update)
+    // useStatue(initial value);
+    const [count, setCount] = useState(0);
+
     function incrementCounterFunction() {
-        console.log('increment clicked');
+        // state[1](state[0] + 1);
+        // console.log(state[0]);
+        // console.log(state[1]);
+        setCount(count + 1);
+        // console.log(count);
     }
 
     return (
         <div className="Counter">
-            <span className="count">0</span>
+            <span className="count">{count}</span>
             <div>
                 <button className="counterButton" 
                         onClick={incrementCounterFunction}
