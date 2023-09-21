@@ -10,7 +10,8 @@ export default function WelcomeComponent() {
         axios.get('http://localhost:8080/hello-world')
             .then((response) => successfulResponse(response)
             )
-            .catch((error) => errorResponse(error));
+            .catch((error) => errorResponse(error))
+            .finally(() => console.log('cleanup'));
     }
 
     function successfulResponse(response) {
