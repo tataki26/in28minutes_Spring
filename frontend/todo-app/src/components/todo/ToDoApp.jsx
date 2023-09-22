@@ -4,6 +4,7 @@ import HeaderComponent from './HeaderComponent'
 import LoginComponent from './LoginComponent'
 import WelcomeComponent from './WelcomeComponent'
 import ListTodosComponent from './ListTodosComponent'
+import TodoComponent from './TodoComponent'
 import LogoutComponent from './LogoutComponent'
 import ErrorComponent from './ErrorComponent'
 import './TodoApp.css'
@@ -34,6 +35,12 @@ export default function TodoApp() {
                         <Route path='/todos' element={ 
                             <AuthenticatedRoute>
                                 <ListTodosComponent /> 
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/todos/:id' element={ 
+                            <AuthenticatedRoute>
+                                <TodoComponent />
                             </AuthenticatedRoute>
                         } />
                         
