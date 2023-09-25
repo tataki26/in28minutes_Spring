@@ -22,6 +22,10 @@ export default function ListTodosComponent() {
         .catch(error => console.log(error));
     }
 
+    function addNewTodo() {
+        navigate(`/todos/-1`);
+    }
+
     function deleteTodo(id) {
         deleteTodoApi(username, id)
         .then(() => {
@@ -69,6 +73,7 @@ export default function ListTodosComponent() {
                     </tbody>
                 </table>
             </div>
+            <div className="btn btn-success m-4" onClick={addNewTodo}>Add New Todo</div>
         </div>
     )
 }
