@@ -14,4 +14,9 @@ export const retrieveHelloWorldBean
     = () => apiClient.get('/hello-world-bean');
 
 export const retrieveHelloWorldPathVariable
-    = (username) => apiClient.get(`/hello-world/path-variable/${username}`);
+    = (username) => apiClient.get(`/hello-world/path-variable/${username}`, {
+        headers: {
+            // Response to preflight request doesn't pass access control check => Authorization header
+            Authorization: 'Basic aW4yOG1pbnV0ZXM6ZHVtbXk='
+        }
+    });
