@@ -1,27 +1,30 @@
 package com.in28minutes.rest.webservices.restfulwebservices.todo;
 
+import com.in28minutes.rest.webservices.restfulwebservices.todo.repository.TodoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// @RestController
-public class TodoResource {
+@RestController
+public class TodoJpaResource {
     private TodoService todoService;
+    private TodoRepository todoRepository;
 
-    public TodoResource(TodoService todoService) {
+    public TodoJpaResource(TodoService todoService, TodoRepository todoRepository) {
         this.todoService = todoService;
+        this.todoRepository = todoRepository;
     }
 
     @GetMapping("/users/{username}/todos")
     public List<Todo> retrieveTodos(@PathVariable String username) {
-        return todoService.findByUsername(username);
+        return todoRepository.findByUsername(username);
     }
 
     @GetMapping("/users/{username}/todos/{id}")
     public Todo retrieveTodo(@PathVariable String username,
                              @PathVariable int id) {
-        return todoService.findById(id);
+        return todoRepository.findById(id).get();
     }
 
     @PostMapping("/users/{username}/todos")
@@ -35,14 +38,14 @@ public class TodoResource {
     public Todo updateTodo(@PathVariable String username,
                                            @PathVariable int id,
                                            @RequestBody Todo todo) {
-        todoService.updateTodo(todo);
+        todoRepository.save(todo);
         return todo;
     }
 
     @DeleteMapping("/users/{username}/todos/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable String username,
                                            @PathVariable int id) {
-        todoService.deleteById(id);
+        todoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
