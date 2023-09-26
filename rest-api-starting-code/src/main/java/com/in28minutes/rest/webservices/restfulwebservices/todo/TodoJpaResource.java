@@ -30,8 +30,9 @@ public class TodoJpaResource {
     @PostMapping("/users/{username}/todos")
     public Todo createTodo(@PathVariable String username,
                            @RequestBody Todo todo) {
-        return todoService.addTodo(username, todo.getDescription(),
-                todo.getTargetDate(), todo.isDone());
+        todo.setUsername(username);
+        todo.setId(null);
+        return todoRepository.save(todo);
     }
 
     @PutMapping("/users/{username}/todos/{id}")
