@@ -1,6 +1,10 @@
 package com.in28minutes.mockito.mockitodemo.business;
 
 public class SomeBusinessImpl {
+    public SomeBusinessImpl(DataService dataService) {
+        this.dataService = dataService;
+    }
+
     private DataService dataService;
 
     public int findTheGreatestFromAllData() {
