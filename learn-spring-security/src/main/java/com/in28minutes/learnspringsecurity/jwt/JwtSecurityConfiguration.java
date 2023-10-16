@@ -1,23 +1,24 @@
-package com.in28minutes.learnspringsecurity.basic;
+package com.in28minutes.learnspringsecurity.jwt;
 
+import com.in28minutes.learnspringsecurity.basic.UserRoles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
-// @Configuration
-public class BasicAuthSecurityConfiguration {
+@Configuration
+public class JwtSecurityConfiguration {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
@@ -30,33 +31,15 @@ public class BasicAuthSecurityConfiguration {
                 session ->
                     session.sessionCreationPolicy(
                             SessionCreationPolicy.STATELESS));
-        // pop-up
-        // http.formLogin(); // use default login page
         // configure HTTP basic authentication
         http.httpBasic();
         // disable csrf
         http.csrf().disable();
         // same origin request -> enable frame option
         http.headers().frameOptions().sameOrigin();
+        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         return http.build();
     }
-
-    /*
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("in28minutes")
-                .password("{noop}dummy")
-                .roles(UserRoles.USER.name())
-                .build();
-
-        UserDetails admin = User.withUsername("admin")
-                .password("{noop}dummy")
-                .roles(UserRoles.ADMIN.name())
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-    */
 
     @Bean
     public DataSource dataSource() {
